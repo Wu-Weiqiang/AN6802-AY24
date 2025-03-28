@@ -3,6 +3,7 @@ import sqlite3
 import datetime
 import google.generativeai as genai
 import os
+import wikipedia
 
 api = "AIzaSyB_eu5Oh21BlbgIWycr5lhqDFM66ds-NPo"
 model = genai.GenerativeModel("gemini-1.5-flash")
@@ -67,6 +68,13 @@ def FAQ():
 def FAQ1():
     r = model.generate_content("Factors for Profit")
     return (render_template("FAQ1.html", r = r.candidates[0].content.parts[0].text))
+
+
+@app.route("/FAQinput", methods = ["POST", "GET"])
+def FAQinput():
+    q = request.form.get("q")
+    r = wikipedia.summary(q)
+    return (render_template("FAQinput.html", r = r))
 
 
 @app.route("/userLog", methods = ["POST", "GET"])
