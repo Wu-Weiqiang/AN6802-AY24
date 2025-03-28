@@ -5,7 +5,7 @@ import google.generativeai as genai
 import os
 import wikipedia
 
-api = "AIzaSyB_eu5Oh21BlbgIWycr5lhqDFM66ds-NPo"
+api = os.getenv("makersuite")
 model = genai.GenerativeModel("gemini-1.5-flash")
 genai.configure(api_key = api)
 
@@ -37,6 +37,16 @@ def main():
 @app.route("/foodexp", methods = ["POST", "GET"])
 def foodexp():
     return (render_template("foodexp.html"))
+
+
+@app.route("/foodexp1", methods = ["POST", "GET"])
+def foodexp1():
+    return (render_template("foodexp1.html"))
+
+
+@app.route("/foodexp2", methods = ["POST", "GET"])
+def foodexp2():
+    return (render_template("foodexp2.html"))
 
 
 @app.route("/foodexp_pred", methods = ["POST", "GET"])
@@ -103,4 +113,4 @@ def deleteLog():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug = True)
